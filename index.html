@@ -116,31 +116,52 @@
 
 
     <script>
-        //button increase
         document.getElementById('btn-Increase').addEventListener('click', function () {
+
+            HandleTicketChange(true);
+
+        });
+        document.getElementById('btn-Decrease').addEventListener('click', function () {
+            HandleTicketChange(false);
+        });
+
+        function HandleTicketChange(isIncrease) {
             const ticketInput = document.getElementById('firstclass-Count');
             const ticketCount = parseInt(ticketInput.value);
-            const ticketNewCount = ticketCount + 1;
+            let ticketNewCount = ticketCount;
+            if (isIncrease == true) {
+                ticketNewCount = ticketCount + 1;
+            }
+            if (isIncrease == false && ticketCount > 0) {
+                ticketNewCount = ticketCount - 1;
+
+            }
             ticketInput.value = ticketNewCount;
             const firstclassTotal = ticketNewCount * 150;
             document.getElementById('firstclass-Total').innerText = firstclassTotal;
+        }
+        // //button increase
+        // document.getElementById('btn-Increase').addEventListener('click', function () {
+        //     const ticketInput = document.getElementById('firstclass-Count');
+        //     const ticketCount = parseInt(ticketInput.value);
+        //     const ticketNewCount = ticketCount + 1;
+        //     ticketInput.value = ticketNewCount;
+        //     const firstclassTotal = ticketNewCount * 150;
+        //     document.getElementById('firstclass-Total').innerText = firstclassTotal;
 
-        })
+        // })
         //button decrease
-        document.getElementById('btn-Decrease').addEventListener('click', function () {
-            const ticketInput = document.getElementById('firstclass-Count');
-            const ticketCount = parseInt(ticketInput.value);
-            if (ticketCount > 0) {
-                const ticketNewCount = ticketCount - 1;
-                ticketInput.value = ticketNewCount;
-                const firstclassTotal = ticketNewCount * 150;
-                document.getElementById('firstclass-Total').innerText = firstclassTotal;
-            }
+        // document.getElementById('btn-Decrease').addEventListener('click', function () {
+        //     const ticketInput = document.getElementById('firstclass-Count');
+        //     const ticketCount = parseInt(ticketInput.value);
+        //     if (ticketCount > 0) {
+        //         const ticketNewCount = ticketCount - 1;
+        //         ticketInput.value = ticketNewCount;
+        //         const firstclassTotal = ticketNewCount * 150;
+        //         document.getElementById('firstclass-Total').innerText = firstclassTotal;
+        //     }
 
-
-
-
-        })
+        // })
 
 
     </script>
