@@ -66,20 +66,22 @@
                         value="1">
                     <h5 id="firstclass-Total">$150</h5>
                 </div>
-                <div class=" d-flex w-auto p-3 plus-minus-btn">
-                    <button id="btn-Increase" type="button" class="btn btn-default">+</button>
-                    <button id="btn-Decrease" type="button" class="btn btn-default">-</button>
+                <div id="firstclass-Total" class=" t d-flex w-auto p-3 plus-minus-btn">
+                    <button onclick="HandleTicketChange('firstclass', true)" type="button" class="btn btn-default">+</button>
+                    <button onclick="HandleTicketChange('firstclass', false)"type="button" class="btn btn-default">-</button>
                 </div>
             </div>
 
             <div class="input-group f-class">
                 <div>
                     <label for="">Economy ($100)</label>
-                    <input class="inp-style inp-width" type="number" placeholder="0" name="">
+                    <input id="economy-Count" class="inp-style inp-width" type="text" placeholder="0" name=""
+                        value="1">
+                    <h5 id="economy-Total">$100</h5>
                 </div>
-                <div class=" d-flex w-auto p-3  plus-minus-btn">
-                    <button id="btn-Increase" type="button" class="btn btn-primary">+</button>
-                    <button id="btn-Decrease" type="button" class="btn btn-primary">-</button>
+                <div id="economy-Total" class=" d-flex w-auto p-3 plus-minus-btn">
+                    <button onclick="HandleTicketChange('economy', true)" type="button" class="btn btn-default">+</button>
+                    <button onclick="HandleTicketChange('economy', false)"type="button" class="btn btn-default">-</button>
                 </div>
             </div>
             <div class="calculations">
@@ -88,7 +90,7 @@
                         <p>Subtotal</p>
                     </div>
                     <div class="right">
-                        <p>$500</p>
+                        <p id="total-price">$500</p>
                     </div>
                 </div>
 
@@ -116,17 +118,18 @@
 
 
     <script>
-        document.getElementById('btn-Increase').addEventListener('click', function () {
+        // document.getElementById('btn-Increase').addEventListener('click', function () {
 
-            HandleTicketChange(true);
+        //     HandleTicketChange(true);
 
-        });
-        document.getElementById('btn-Decrease').addEventListener('click', function () {
-            HandleTicketChange(false);
-        });
+        // });
+        // document.getElementById('btn-Decrease').addEventListener('click', function () {
+        //     HandleTicketChange(false);
+        // });
 
-        function HandleTicketChange(isIncrease) {
-            const ticketInput = document.getElementById('firstclass-Count');
+
+        function HandleTicketChange(ticketType,isIncrease) {
+            const ticketInput = document.getElementById(ticketType + '-Count');
             const ticketCount = parseInt(ticketInput.value);
             let ticketNewCount = ticketCount;
             if (isIncrease == true) {
@@ -137,9 +140,29 @@
 
             }
             ticketInput.value = ticketNewCount;
-            const firstclassTotal = ticketNewCount * 150;
-            document.getElementById('firstclass-Total').innerText = firstclassTotal;
+            //const firstclassTotal = ticketNewCount * 150;
+            let ticketTotal = 0;
+            if(ticketType == 'firstclass'){
+                ticketTotal = ticketNewCount * 150;
+            }
+            if(ticketType == 'economy'){
+                ticketTotal = ticketNewCount * 100;
+            }
+            document.getElementById(ticketType +'-Total').innerText = ticketTotal;
+            calculateTotal();
         }
+        function calculateTotal(){
+            const firstclassInput = document.getElementById('firstclass-Total');
+            const firstclassCount = parseInt(firstclassInput.value);
+
+            const economyInput = document.getElementById('economy-Total');
+            const economyCount = parseInt(economyInput.value);
+            const totalPrice = firstclassCount * 150 + economyCount * 100;
+        }
+        document.getElementById('total-price').innerText ='$'+ totalPrice;
+
+
+
         // //button increase
         // document.getElementById('btn-Increase').addEventListener('click', function () {
         //     const ticketInput = document.getElementById('firstclass-Count');
